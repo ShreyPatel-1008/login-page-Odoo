@@ -244,13 +244,191 @@
             text-decoration: underline;
         }
         
+        /* Signup Form Styles */
+        .signup-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .signup-form .form-group {
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .signup-form .form-group:nth-child(1) {
+            animation: fadeInUp 0.5s ease-out 0.5s forwards;
+        }
+        
+        .signup-form .form-group:nth-child(2) {
+            animation: fadeInUp 0.5s ease-out 0.7s forwards;
+        }
+        
+        .signup-form .form-group:nth-child(3) {
+            animation: fadeInUp 0.5s ease-out 0.9s forwards;
+        }
+        
+        .signup-form .form-group:nth-child(4) {
+            animation: fadeInUp 0.5s ease-out 1.1s forwards;
+        }
+        
+        .signup-form .form-group:nth-child(5) {
+            animation: fadeInUp 0.5s ease-out 1.3s forwards;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .signup-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .signup-form input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .signup-form input:focus {
+            border-color: var(--eco-green);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+        
+        .signup-form input:hover {
+            border-color: var(--cool-blue);
+        }
+        
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out 1.5s forwards;
+        }
+        
+        .terms-checkbox input[type="checkbox"] {
+            width: auto;
+            margin-top: 2px;
+        }
+        
+        .terms-checkbox label {
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 0;
+        }
+        
+        .terms-checkbox a {
+            color: var(--eco-green);
+            text-decoration: none;
+        }
+        
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+        
+        .signup-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--eco-green), var(--cool-blue));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s ease-out 1.7s forwards;
+        }
+        
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        }
+        
+        .signup-btn:active {
+            transform: translateY(0);
+        }
+        
+        .login-option {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--text-dark);
+            font-size: 14px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out 1.9s forwards;
+        }
+        
+        .login-option a {
+            color: var(--eco-green);
+            font-weight: 500;
+            text-decoration: none;
+            margin-left: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .login-option a:hover {
+            text-decoration: underline;
+        }
+        
+        .guest-option {
+            text-align: center;
+            margin-top: 15px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out 2.1s forwards;
+        }
+        
+        .guest-option a {
+            color: var(--cool-blue);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .guest-option a:hover {
+            text-decoration: underline;
+        }
+        
         @media (max-width: 600px) {
-            .login-container {
+            .login-container,
+            .signup-container {
                 padding: 30px 20px;
             }
             
             .logo h1 {
                 font-size: 24px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
             }
         }
     </style>
@@ -266,6 +444,26 @@
                 
                 icon.style.left = `${posX}px`;
                 icon.style.top = `${posY}px`;
+            });
+            
+            // Toggle between login and signup forms
+            const showSignupBtn = document.getElementById('showSignup');
+            const showLoginBtn = document.getElementById('showLogin');
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            
+            showSignupBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+                signupForm.style.animation = 'fadeIn 0.8s ease-out forwards';
+            });
+            
+            showLoginBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                signupForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                loginForm.style.animation = 'fadeIn 0.8s ease-out forwards';
             });
         });
     </script>
@@ -286,33 +484,86 @@
             <div class="clothes-icon">👘</div>
         </div>
         
-        <div class="login-container">
-        <div class="logo">
-            <h1>ReWear</h1>
-            <p>Sustainable Fashion Exchange</p>
+        <div class="login-container" id="loginForm">
+            <div class="logo">
+                <h1>ReWear</h1>
+                <p>Sustainable Fashion Exchange</p>
+            </div>
+            
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="username">Email or Username</label>
+                    <input type="text" id="username" placeholder="Enter your email or username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+                
+                <div class="forgot-password">
+                    <a href="#">Forgot Password?</a>
+                </div>
+                
+                <div class="signup-option">
+                    New to ReWear? <a href="#" id="showSignup">Sign Up</a> or <a href="#">Continue as Guest</a>
+                </div>
+            </form>
         </div>
-        
-        <form class="login-form">
-            <div class="form-group">
-                <label for="username">Email or Username</label>
-                <input type="text" id="username" placeholder="Enter your email or username" required>
+
+        <div class="signup-container" id="signupForm" style="display: none;">
+            <div class="logo">
+                <h1>ReWear</h1>
+                <p>Join the Sustainable Fashion Community</p>
             </div>
             
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
-            </div>
-            
-            <button type="submit" class="login-btn">Login</button>
-            
-            <div class="forgot-password">
-                <a href="#">Forgot Password?</a>
-            </div>
-            
-            <div class="signup-option">
-                New to ReWear? <a href="#">Sign Up</a> or <a href="#">Continue as Guest</a>
-            </div>
-        </form>
-    </div>
+            <form class="signup-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstname">First Name</label>
+                        <input type="text" id="firstname" placeholder="Enter your first name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" id="lastname" placeholder="Enter your last name" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a strong password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+                </div>
+                
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="signup-btn">Create Account</button>
+                
+                <div class="login-option">
+                    Already have an account? <a href="#" id="showLogin">Login</a>
+                </div>
+                
+                <div class="guest-option">
+                    <a href="#">Continue as Guest</a>
+                </div>
+            </form>
+        </div>
 </body>
 </html>
